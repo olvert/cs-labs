@@ -18,6 +18,8 @@
 #define FALSE 0
 #define LENGTH 16
 
+#define AGE_LIMIT 3
+
 void sighandler() {
 
 	/* add signalhandling routines here */
@@ -32,7 +34,7 @@ int main(int argc, char *argv[]) {
 	char important[LENGTH] = "***IMPORTANT***";
 
 	char user[LENGTH];
-	//char   *c_pass; //you might want to use this variable later...
+	char *c_pass; //you might want to use this variable later...
 	char prompt[] = "password: ";
 	char *user_pass;
 
@@ -64,14 +66,34 @@ int main(int argc, char *argv[]) {
 			/* You have to encrypt user_pass for this to work */
 			/* Don't forget to include the salt */
 
-			if (!strcmp(user_pass, passwddata->passwd)) {
+            /* Encrypt password */
+            c_pass = crypt(user_pass, passwddata->passwd_salt);
+
+            printf("Encrypted pass: %s\n", c_pass);
+
+			if (!strcmp(c_pass, passwddata->passwd)) {
 
 				printf(" You're in !\n");
+                printf(" Number of attempts: %d\n", passwddata->pwfailed);
+
+                /* Reset attempt counter, increment age and update db */
+                passwddata->pwfailed = 0;
+                passwddata->pwage = passwddata->pwage + 1;
+                mysetpwent(passwddata->pwname, passwddata);
+
+                /* Check if password has reached age limit */
+                if (passwddata->pwage > AGE_LIMIT)
+                    printf(" Password has reached age limit! Please update password.\n");
 
 				/*  check UID, see setuid(2) */
 				/*  start a shell, use execve(2) */
 
-			}
+			} else {
+
+                /* If login fails, increment attempt counter and update db */
+                passwddata->pwfailed = passwddata->pwfailed + 1;
+                mysetpwent(passwddata->pwname, passwddata);
+            }
 		}
 		printf("Login Incorrect \n");
 	}
