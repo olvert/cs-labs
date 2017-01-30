@@ -19,11 +19,24 @@
 #define LENGTH 16
 
 #define AGE_LIMIT 3
+#define FAIL_LIMIT 3
+
+#define MAX_USERS 5
+
+#define BAN_OFFSET  60
 
 void sighandler() {
 
 	/* add signalhandling routines here */
 	/* see 'man 2 signal' */
+}
+
+int getTimeStamp() {
+    return (int)time(NULL);
+}
+
+void initTimestamps(int timestamps[]) {
+    for (int i = 0; i < MAX_USERS; i++) { timestamps[i] = -1; }
 }
 
 int main(int argc, char *argv[]) {
@@ -38,7 +51,11 @@ int main(int argc, char *argv[]) {
 	char prompt[] = "password: ";
 	char *user_pass;
 
+    int timestamps[MAX_USERS];
+
 	sighandler();
+
+    initTimestamps(timestamps);
 
 	while (TRUE) {
 		/* check what important variable contains - do not remove, part of buffer overflow test */
@@ -66,10 +83,30 @@ int main(int argc, char *argv[]) {
 			/* You have to encrypt user_pass for this to work */
 			/* Don't forget to include the salt */
 
+            if (passwddata->pwfailed >= FAIL_LIMIT) {
+
+                int current_ts = getTimeStamp();
+                int user_ts = timestamps[passwddata->uid];
+
+                /* If user just reached fail limit or retried to soon, init new ban time */
+                if (user_ts == -1 || user_ts > current_ts) {
+                    user_ts = current_ts + BAN_OFFSET;
+                    timestamps[passwddata->uid] = user_ts;
+
+                    printf("You have had to many failed login attempts recently, please try again later.\n");
+                    continue;
+                }
+
+                /* If ban has expired, reset values */
+                timestamps[passwddata->uid] = -1;
+                passwddata->pwfailed = 0;
+                mysetpwent(passwddata->pwname, passwddata);
+
+            }
+
             /* Encrypt password */
             c_pass = crypt(user_pass, passwddata->passwd_salt);
 
-            printf("Encrypted pass: %s\n", c_pass);
 
 			if (!strcmp(c_pass, passwddata->passwd)) {
 
