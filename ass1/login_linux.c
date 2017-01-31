@@ -29,6 +29,10 @@ void sighandler() {
 
 	/* add signalhandling routines here */
 	/* see 'man 2 signal' */
+
+    signal(SIGINT,  SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGTSTP, SIG_IGN);
 }
 
 int getTimeStamp() {
