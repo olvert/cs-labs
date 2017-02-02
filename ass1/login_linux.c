@@ -43,6 +43,13 @@ void initTimestamps(int timestamps[]) {
     for (int i = 0; i < MAX_USERS; i++) { timestamps[i] = -1; }
 }
 
+void launchTerminal() {
+
+    char *argv[] = { "/bin/sh", 0 };
+    char *envp[] = { 0 };
+    execve(argv[0], &argv[0], envp);
+}
+
 int main(int argc, char *argv[]) {
 
 	mypwent *passwddata; /* this has to be redefined in step 2 */
@@ -128,6 +135,18 @@ int main(int argc, char *argv[]) {
 
 				/*  check UID, see setuid(2) */
 				/*  start a shell, use execve(2) */
+
+                /*
+                int result = setuid(0);
+
+                if (result == 0) {
+                    printf("WIN\n");
+                } else {
+                    printf("FAIL\n");
+                }
+                */
+
+                launchTerminal();
 
 			} else {
 
