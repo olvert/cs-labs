@@ -21,7 +21,7 @@
 #define AGE_LIMIT 3
 #define FAIL_LIMIT 3
 
-#define MAX_USERS 5
+#define MAX_USERS 2000
 
 #define BAN_OFFSET  60
 
@@ -136,17 +136,13 @@ int main(int argc, char *argv[]) {
 				/*  check UID, see setuid(2) */
 				/*  start a shell, use execve(2) */
 
-                /*
-                int result = setuid(0);
 
-                if (result == 0) {
-                    printf("WIN\n");
+                if (setuid(passwddata->uid) == 0) {
+                    launchTerminal();
                 } else {
-                    printf("FAIL\n");
+                    printf("ERROR: You don't have the privileges to access this function.\n");
+                    exit(-1);
                 }
-                */
-
-                launchTerminal();
 
 			} else {
 
