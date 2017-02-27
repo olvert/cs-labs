@@ -1,0 +1,18 @@
+\section{Discussion} \label{sec:discussion}
+
+The scanning of ports did not reveal anything out of the order. However the applications using the open ports and services contain multiple security issues. As mentioned in Table 1, if these services are not needed, they should be closed to avoid the issues altogether. If the applications and services are to remain, the common solution for the majority of them is to update the software to the latest version. Since multiple vulnerabilities were considered as high risk, whatever decision the company decides to make should be done as soon as possible. 
+\begin{table}[htb]
+ \centering
+ \caption{Summary of vulnerability scan recommendations} 
+ \label{tab:recommendations}
+ \begin{tabular}{m{2cm}p{4cm}p{7cm}} \toprule
+ \textbf{Service Name} & \textbf{Problems} & \textbf{Suggestions} \\ \midrule
+ http, http-alt 	& Outdated versions of Apache, Apache HTTP Server and Apache Tomcat. Enables multiple security vulnerabilities. Existing example files could expose version information. & Update to latest version and remove example files. \\
+ imap, imaps, pop3, pop3s & Outdated version of OpenSSL. Enables man in the middle security bypass. & Updated to latest version. \\
+ tcp & TCP timestamps could possibly expose system uptime. & Disable TCP timestamps. \\
+ netbio-ssn & Outaded version of Samba which enables denial-of-service vulnerabilities. & Update to latest version. \\
+ imaps, pop3s & The SSL certificate has expired. & Renew the certificate. \\ 
+ ssh & Outdated version. & Update to latest version. \\ \bottomrule
+ \end{tabular} 
+\end{table}
+

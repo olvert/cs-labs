@@ -1,0 +1,9 @@
+[4] Config.pm:343> INFO - This is Biber 2.5
+[6] Config.pm:346> INFO - Logfile is '/Users/ollesvensson/DevFiles/cs-labs/ass3/latex/.texpadtmp/report.blg'
+[147] biber-darwin:290> INFO - === Sun Feb 19, 2017, 23:22:50
+[181] Biber.pm:351> INFO - Reading '/Users/ollesvensson/DevFiles/cs-labs/ass3/latex/.texpadtmp/report.bcf'
+[311] Biber.pm:776> INFO - Found 0 citekeys in bib section 0
+[323] Utils.pm:149> WARN - The file '/Users/ollesvensson/DevFiles/cs-labs/ass3/latex/.texpadtmp/report.bcf' does not contain any citations!
+[330] bbl.pm:526> INFO - Writing '/Users/ollesvensson/DevFiles/cs-labs/ass3/latex/.texpadtmp/report.bbl' with encoding 'UTF-8'
+[330] bbl.pm:619> INFO - Output to /Users/ollesvensson/DevFiles/cs-labs/ass3/latex/.texpadtmp/report.bbl
+[330] Biber.pm:108> INFO - WARNINGS: 1

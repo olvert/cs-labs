@@ -1,0 +1,7 @@
+This is the template for the Computer Security Course Lab 3.
+To make this LaTeX document on the Chalmers Linux System, you
+need to source the environment for setting up the correct path:
+Run "source /chalmers/sw/unsup/texlive/bashrc.inc" in you bash
+shell.
+
+(This template has been checked with TeXLive-2012)

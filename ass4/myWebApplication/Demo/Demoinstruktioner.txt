@@ -1,0 +1,20 @@
+Demoinstruktioner:
+
+Firefox - browser för angriparen, Chrome - browser för användaren
+
+Angripare:
+Ett: Gå till förstasidan på applikationen i Firefox, klicka på Feedback.
+Två: Klista in koden från filen Attack.txt i kommentarsfältet.
+
+Vanlig användare:
+Tre: Logga in i applikationen.
+Fyra: Gå till Visa feedback och när sidan visas kommer autentiseringskakan att skickas och
+	läggas i C:\tmp\cookie.txt
+
+Angripare:
+Fem: Gå till C:\tmp\cookie.txt och kopiera innehållet
+Sex: Öppna cookie manager. Skapa en ny kaka med namn = auth och värde = värdet från cookie.txt
+Sju: Gå till Default.aspx med den nya kakan installerad.
+Åtta: Gå till fileupload, ladda upp backdoor.aspx
+Nio: Surfa till localhost...backdoor.aspx
+Tio: Kör något kommando

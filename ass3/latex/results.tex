@@ -1,0 +1,61 @@
+\section{Results}
+
+\subsection{Port Scanning}
+
+A port is a logical construct that identifies a specific process or a type of network service. The port scan that we performed used the scan config port scanners. The ports mentioned in the report (open ports on the remote system) are known as well-known because they are used by system processes that provide widely used types of network services. Is really important to test all ports in order to achieve security verification and the  main reason is that networks ports are the entry points to a machine that is connected to the Internet. A service that listens on a port is able to receive data from a client application, process it and send it back and consequently, malicious clients can take advantage of it.
+
+The scan found 10 open TCP ports in total from the OpenVAS default range of ports. The open ports are used for standard services like mail, web browsing and file and printer sharing. No significant threats, a few minor issues regarding the services \textit{domain}, \textit{microsoft-ds} and \textit{ssh} that could be evaluated further if needed.
+
+
+\begin{table}[htb]
+ \centering
+ \caption{Information about open ports} \label{tab:open_ports}
+ \begin{tabular}{m{1.8cm}m{1.5cm}p{5.7cm}p{3.7cm}} \toprule
+ \textbf{Port Number} & \textbf{Service Name} & 
+ \textbf{Service Task} & 
+ \textbf{Suggestions} \\ \midrule
+ 53 	& domain		& Used for DNS services. & Could expose a list of all computers connected to the internal network through a \textit{zone transfer} request. If this is considered sensitive information, incoming TCP requests on this port should be blocked.\\
+ 80 	& http			& Used for sending and receiving HTTP-requests. & Should remain open if the network is to support the usage of web browsers.\\
+ 8080 	& http-alt		& Alternative port for offering web services through HTTP. & Mostly used for hosting web services when port 80 is unavailable. The port could be closed if it is not used for this purpose. \\
+ 143	& imap			& Used to retrieve mail from remote mail servers. & Should be kept open if the network wishes to support mail clients.\\
+ 993	& imaps			& IMAP over SSL. & Should be kept open if the network wishes to support mail clients.\\
+ 445	& mircosoft-ds	& Used for Windows file sharing and numerous other services. & Used by the SMB protocol which has had multiple vulnerabilities in the past. Should be closed if not needed. If needed, make sure that the services using it support secure authentication protocols. \\
+ 139	& netbios-ssn	& A protocol used for file and print sharing under all current versions of Windows. & Should remain open if the network wants to support file and print sharing. \\
+ 110	& pop3			& Used by mail clients for retrieval of mail from designated mail servers. & Keep open to support mail clients or servers. \\
+ 995	& pop3s			& POP3 over SSL. & Keep open to support mail clients or servers. \\ 
+ 22		& ssh			& Used for the SSH remote login protocol. & SSH has contained vulnerabilities in the past. Close if SSH access is not needed. \\ \bottomrule
+ \end{tabular} 
+\end{table}
+
+
+\subsection{Fingerprinting}
+
+
+\subsubsection{Services}
+
+The scan was unable to retrieve any version information from the targeted services even when extending the range of ports and selecting all available NVT's in the categories General and Service Detection.
+
+The only service information retrieved was from the DNS server which is an open-source variant called BIND 'NAMED' running on version 9.7.0-P1.
+
+\begin{table}[htb]
+ \centering
+ \caption{Service fingerprint} \label{tab:service_fingerprint}
+ \begin{tabular}{m{2cm}p{5cm}} \toprule
+ \textbf{Service} & \textbf{Version} \\ \midrule
+ Telnet & \textit{unknown} \\
+ FTP & \textit{unknown} \\
+ SSH & \textit{unknown} \\
+ SMTP & \textit{unknown} \\
+ WWW & \textit{unknown} \\ \bottomrule
+ \end{tabular} 
+\end{table}
+
+
+\subsubsection{Remote Host}
+
+As with services, the scan was unable to retrieve any information regarding the host operating system or architecture.
+
+
+\subsection{Vulnerability Scan}
+
+The scan found a total of 7 high threats and 14 medium threats. All high threats are related to outdated versions of Apache and OpenSSL applications. The majority of the medium threats are related to outdated versions as well. Remaining errors consists of two configuration issues and a expired certificate.

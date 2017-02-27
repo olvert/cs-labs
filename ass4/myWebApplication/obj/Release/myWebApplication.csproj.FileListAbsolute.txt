@@ -1,0 +1,5 @@
+C:\Temp\cs_lab4\myWebApplication\bin\myWebApplication.dll
+C:\Temp\cs_lab4\myWebApplication\bin\myWebApplication.pdb
+C:\Temp\cs_lab4\myWebApplication\obj\Release\ResolveAssemblyReference.cache
+C:\Temp\cs_lab4\myWebApplication\obj\Release\myWebApplication.dll
+C:\Temp\cs_lab4\myWebApplication\obj\Release\myWebApplication.pdb
